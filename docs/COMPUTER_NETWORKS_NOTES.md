@@ -1,10 +1,8 @@
 # Computer Networks, in everyday language
 
-VNRVJIET · R25 · CSE (Cyber Security) · II year / III semester
+A five-unit learning guide for everyone curious about networks.
 
-25PC1CY201 — Computer Networks (theory, 3 credits). [Official syllabus, printed pages 8–9](https://www.vnrvjiet.ac.in/__l5e/assets-v1/d9ef8b4d-3050-4e88-b889-d240c02d2b53/II-B.Tech-CYS-R25.pdf#page=8).
-
-Independent teaching notes, not official college notes. Laboratory experiments are excluded. Each topic explicitly distinguishes the app’s live/partial model from theory-only coverage.
+Each topic explicitly distinguishes the app’s live/partial model from theory-only coverage.
 
 ## Unit 1: How a network carries a message
 
@@ -313,11 +311,11 @@ Coverage: **Theory only**
 
 **Everyday explanation:** Listening before speaking can reduce interruptions, but different media need different ways to handle remaining conflicts.
 
-**Networking terms:** CSMA/CD detects collisions in shared half-duplex Ethernet. CSMA/CA uses avoidance mechanisms in wireless LANs. CDMA separates users by coding. The syllabus prints “CDMA/CA”; these notes distinguish CSMA/CA from CDMA rather than treating them as the same protocol.
+**Networking terms:** CSMA/CD detects collisions in shared half-duplex Ethernet. CSMA/CA uses avoidance mechanisms in wireless LANs. CDMA separates users by coding. CSMA/CA and CDMA are different mechanisms, not two names for the same protocol.
 
 **In PacketVerse:** The local links are modeled as full-duplex, so collision detection/avoidance and code-division access are explained separately.
 
-**Common mix-up:** Modern switched full-duplex Ethernet does not use collision detection on those links. Check the printed notation with your instructor when revising the syllabus wording.
+**Common mix-up:** Modern switched full-duplex Ethernet does not use collision detection on those links. CSMA/CD, CSMA/CA and CDMA solve different channel-sharing problems.
 
 ### Worked example: Four pages, with page 1 missing
 

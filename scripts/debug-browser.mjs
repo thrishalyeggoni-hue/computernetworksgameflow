@@ -29,6 +29,7 @@ try {
     .click();
   assert(await page.locator("#replay").isDisabled());
   checks.push("Replay is disabled before a run");
+  await page.locator("#speed").selectOption("1");
   await page.locator("#message").fill("Stable message");
   await page.locator("#send").click();
   await page.locator("#play").click();

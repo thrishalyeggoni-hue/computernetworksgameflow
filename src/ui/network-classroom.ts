@@ -1,6 +1,5 @@
 import { soundEffects } from '../audio/sound-effects';
 import {
-  networkSyllabus,
   networkUnits,
   type NetworkUnit,
 } from "../learning/network-course";
@@ -224,7 +223,7 @@ export function conceptDiagram(frame: VisualFrame, narrow = false): string {
   return `<svg viewBox="0 0 900 320" class="concept-svg" role="img" aria-label="${e(frame.caption)}"><title>${e(frame.caption)}</title><defs><marker id="cn-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="none" stroke="#9cbcd0" stroke-width="1.5"/></marker><pattern id="cn-dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#aecde3" opacity=".25"/></pattern></defs><rect width="900" height="320" fill="url(#cn-dots)"/><circle cx="74" cy="36" r="5" fill="#ffc3db"/><path d="M821 265h12m-6-6v12" stroke="#bd9bec" stroke-width="3" stroke-linecap="round"/>${drawing}</svg>`;
 }
 export function networkClassroom(unit: NetworkUnit): string {
-  return `<section class="visual-classroom unit-theme-${unit.id}"><header class="visual-classroom-header"><div><span class="visual-eyebrow">VNRVJIET · R25 · CYS · COMPUTER NETWORKS</span><h2>See it. Try it. <em>Get it.</em></h2><p>Start with your unit. Pick a picture, press Play, and open extra notes when needed.</p></div><div class="visual-header-sticker" aria-hidden="true">✦<span>less reading<br>more discovering</span></div></header>
+  return `<section class="visual-classroom unit-theme-${unit.id}"><header class="visual-classroom-header"><div><span class="visual-eyebrow">COMPUTER NETWORKS · FOR EVERYONE</span><h2>See it. Try it. <em>Get it.</em></h2><p>Start with your unit. Pick a picture, press Play, and open extra notes when needed.</p></div><div class="visual-header-sticker" aria-hidden="true">✦<span>less reading<br>more discovering</span></div></header>
  ${unit.id===1?'<div class="classroom-osi-link"><span>Unit 1 visual tool · see the seven network jobs in action.</span><button id="cn-open-osi">Open OSI Explorer ↗</button></div>':''}
  <nav class="visual-unit-nav" aria-label="Computer Networks theory units">${networkUnits.map((u) => `<button data-cn-unit="${u.id}" class="unit-color-${u.id}" aria-pressed="${u.id === unit.id}"><span>${icons[u.id - 1]}</span><div><small>UNIT ${["I", "II", "III", "IV", "V"][u.id - 1]}</small><strong>${names[u.id - 1]}</strong></div></button>`).join("")}</nav>
  <div class="visual-unit-title"><div><span class="visual-eyebrow">UNIT ${unit.id} · ${unit.topics.length} LITTLE DISCOVERIES</span><h3 id="cn-unit-title" tabindex="-1">${e(unit.question)}</h3></div><span class="visual-tip">↓ Pick any topic</span></div>
@@ -234,7 +233,7 @@ export function networkClassroom(unit: NetworkUnit): string {
  <details class="visual-reference"><summary>Need the classroom wording? <span>Optional notes +</span></summary><div id="concept-notes"></div></details>
  <details class="visual-reference"><summary>Worked example & revision <span>Optional +</span></summary><h4>${e(unit.worked.title)}</h4><ol>${unit.worked.steps.map((s) => `<li>${e(s)}</li>`).join("")}</ol><h4>Explain these aloud</h4><ul>${unit.revision.map((s) => `<li>${e(s)}</li>`).join("")}</ul><details class="visual-self-check"><summary>${e(unit.check.question)}</summary><p>${e(unit.check.answer)}</p></details></details>
  <div class="visual-bottom-nav"><button id="cn-prev" class="secondary" ${unit.id === 1 ? "disabled" : ""}>← Previous unit</button><button id="cn-download" class="text-button">↓ Full notes</button><button id="cn-next" class="primary" ${unit.id === 5 ? "disabled" : ""}>Next unit →</button></div>
- <footer class="visual-classroom-footer"><a href="${e(networkSyllabus.source)}" target="_blank" rel="noreferrer">${e(networkSyllabus.code)} · Official theory syllabus ↗</a><span>Concept pictures are teaching illustrations, separate from the network simulation.</span></footer></section>`;
+ <footer class="visual-classroom-footer"><span>Five units · Learn at your own pace</span><span>Concept pictures are teaching illustrations, separate from the network simulation.</span></footer></section>`;
 }
 export function mountNetworkVisuals(host: HTMLElement, unit: NetworkUnit) {
   const stories = visualUnits[unit.id - 1];

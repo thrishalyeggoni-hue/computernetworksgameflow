@@ -718,7 +718,7 @@ export const visualUnits: VisualStory[][] = [
     ),
     story(
       "Three channel-sharing ideas—not synonyms.",
-      "The syllabus prints “CDMA/CA”; distinguish CSMA/CA from CDMA.",
+      "CSMA/CD, CSMA/CA and CDMA are three different ways to share a channel.",
       f(
         "CSMA/CD: shared half-duplex Ethernet detects a collision, then backs off.",
         [

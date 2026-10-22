@@ -1,4 +1,4 @@
-/** Independent explanations mapped to the official Computer Networks theory course. */
+/** Plain-language Computer Networks lessons for everyone. */
 export type Coverage = "Live model" | "Partial model" | "Theory only";
 export interface NetworkTopic {
   title: string;
@@ -20,15 +20,9 @@ export interface NetworkUnit {
   scene: { scenario: string; page: string; instruction: string };
 }
 export const networkSyllabus = {
-  code: "25PC1CY201",
   course: "Computer Networks",
-  source:
-    "https://www.vnrvjiet.ac.in/__l5e/assets-v1/d9ef8b4d-3050-4e88-b889-d240c02d2b53/II-B.Tech-CYS-R25.pdf#page=8",
-  pages: "Printed pages 8–9",
-  institution: "VNRVJIET",
-  regulation: "R25",
-  branch: "CSE (Cyber Security)",
-  semester: "II year · III semester",
+  audience: "Everyone curious about networks",
+  units: "Units 1–5",
 };
 const t = (
   title: string,
@@ -246,9 +240,9 @@ export const networkUnits: NetworkUnit[] = [
       t(
         "CSMA/CD, CSMA/CA and code division",
         "Listening before speaking can reduce interruptions, but different media need different ways to handle remaining conflicts.",
-        "CSMA/CD detects collisions in shared half-duplex Ethernet. CSMA/CA uses avoidance mechanisms in wireless LANs. CDMA separates users by coding. The syllabus prints “CDMA/CA”; these notes distinguish CSMA/CA from CDMA rather than treating them as the same protocol.",
+        "CSMA/CD detects collisions in shared half-duplex Ethernet. CSMA/CA uses avoidance mechanisms in wireless LANs. CDMA separates users by coding. CSMA/CA and CDMA are different mechanisms, not two names for the same protocol.",
         "The local links are modeled as full-duplex, so collision detection/avoidance and code-division access are explained separately.",
-        "Modern switched full-duplex Ethernet does not use collision detection on those links. Check the printed notation with your instructor when revising the syllabus wording.",
+        "Modern switched full-duplex Ethernet does not use collision detection on those links. CSMA/CD, CSMA/CA and CDMA solve different channel-sharing problems.",
       ),
     ],
     worked: {
@@ -570,7 +564,7 @@ export const networkUnits: NetworkUnit[] = [
 ];
 export function networkStudyNotes(): string {
   return (
-    `# Computer Networks, in everyday language\n\nVNRVJIET · R25 · CSE (Cyber Security) · II year / III semester\n\n${networkSyllabus.code} — Computer Networks (theory, 3 credits). [Official syllabus, printed pages 8–9](${networkSyllabus.source}).\n\nIndependent teaching notes, not official college notes. Laboratory experiments are excluded. Each topic explicitly distinguishes the app’s live/partial model from theory-only coverage.\n\n` +
+    `# Computer Networks, in everyday language\n\nA five-unit learning guide for everyone curious about networks.\n\nEach topic explicitly distinguishes the app’s live/partial model from theory-only coverage.\n\n` +
     networkUnits
       .map(
         (u) =>

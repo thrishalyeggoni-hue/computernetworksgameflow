@@ -24,11 +24,8 @@ try {
     await page.locator(".visual-classroom-header h2").innerText(),
     /See it. Try it. Get it./,
   );
-  assert(
-    (
-      await page.locator(".visual-classroom-footer a").getAttribute("href")
-    ).endsWith("II-B.Tech-CYS-R25.pdf#page=8"),
-  );
+  assert.match(await page.locator('.visual-classroom-footer').innerText(), /Learn at your own pace/);
+  assert.doesNotMatch(await page.locator('#modal-content').innerText(), /VNRVJIET|R25|CYS|25PC1CY201/);
   assert.equal(await page.locator(".visual-reference[open]").count(), 0);
   checks.push("Diagrams are primary; detailed theory starts collapsed");
   let stories = 0,

@@ -1,0 +1,24 @@
+{
+  "runs": 18,
+  "transmissions": 714,
+  "checks": [
+    "delivery, a → b: Complete; per-hop IP, MAC, TTL, cable endpoints and timing verified",
+    "delivery, b → a: Complete; per-hop IP, MAC, TTL, cable endpoints and timing verified",
+    "loss, a → b: Complete; per-hop IP, MAC, TTL, cable endpoints and timing verified",
+    "loss, b → a: Complete; per-hop IP, MAC, TTL, cable endpoints and timing verified",
+    "ack, a → b: Complete; per-hop IP, MAC, TTL, cable endpoints and timing verified",
+    "ack, b → a: Complete; per-hop IP, MAC, TTL, cable endpoints and timing verified",
+    "udp, a → b: Failed; per-hop IP, MAC, TTL, cable endpoints and timing verified",
+    "udp, b → a: Failed; per-hop IP, MAC, TTL, cable endpoints and timing verified",
+    "reroute, a → b: Complete; per-hop IP, MAC, TTL, cable endpoints and timing verified",
+    "reroute, b → a: Complete; per-hop IP, MAC, TTL, cable endpoints and timing verified",
+    "no-route, a → b: Failed; per-hop IP, MAC, TTL, cable endpoints and timing verified",
+    "no-route, b → a: Failed; per-hop IP, MAC, TTL, cable endpoints and timing verified",
+    "reorder, a → b: Complete; per-hop IP, MAC, TTL, cable endpoints and timing verified",
+    "reorder, b → a: Complete; per-hop IP, MAC, TTL, cable endpoints and timing verified",
+    "ttl, a → b: Failed; per-hop IP, MAC, TTL, cable endpoints and timing verified",
+    "ttl, b → a: Failed; per-hop IP, MAC, TTL, cable endpoints and timing verified",
+    "delay, a → b: Complete; per-hop IP, MAC, TTL, cable endpoints and timing verified",
+    "delay, b → a: Complete; per-hop IP, MAC, TTL, cable endpoints and timing verified"
+  ]
+}

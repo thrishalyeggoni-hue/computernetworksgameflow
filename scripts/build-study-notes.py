@@ -52,14 +52,14 @@ class NotesDoc(SimpleDocTemplate):
 def decorate(c,doc):
  c.saveState();c.setFillColor(colors.HexColor('#fcfcf7'));c.rect(0,0,W,H,stroke=0,fill=1)
  c.setFont('Display',11);c.setFillColor(colors.HexColor('#43877a'));c.drawString(46,H-32,'PacketVerse / CN study notes')
- c.setFont('Body',7);c.setFillColor(MUTED);c.drawRightString(W-46,H-32,'R25 / CYS / THEORY / UNITS 1-5')
+ c.setFont('Body',7);c.setFillColor(MUTED);c.drawRightString(W-46,H-32,'COMPUTER NETWORKS / UNITS 1-5')
  c.setStrokeColor(LINE);c.line(46,H-43,W-46,H-43);c.line(46,40,W-46,40)
  c.setFont('Body',7.3);c.drawString(46,27,'Independent teaching notes | Colour-coded chapters | Plain-language explanations');c.drawRightString(W-46,27,str(doc.page));c.restoreState()
 
-add('VNRVJIET / R25 / CSE (CYBER SECURITY)','tag')
+add('COMPUTER NETWORKS / FOR EVERYONE','tag')
 add('Computer Networks.<br/>The complete study notes.','cover')
 add('All five theory units, explained in everyday language.','h2')
-add(f'{esc(meta["code"])} | II year / III semester | 3 credits','small')
+add('Five units | Learn at your own pace','small')
 add('A structured companion to the visual classroom: clear explanations, networking terminology, links to the app, common mistakes, worked examples and revision prompts.')
 rows=[[str(u['id']),u['title']] for u in units]
 t=Table([[txt('UNIT','label'),txt('YOUR LEARNING PATH','label')]]+[[txt(a,'label'),txt(b)] for a,b in rows],colWidths=[52,CW-52])
@@ -68,7 +68,7 @@ for i,(tone,pale) in enumerate(PALETTE,1):rules += [('BACKGROUND',(0,i),(-1,i),c
 t.setStyle(TableStyle(rules));story.append(t);story.append(Spacer(1,18))
 add('How to use these notes','h2')
 add('Read the everyday explanation first. Then connect it to the networking terms. Use the app connection to see what you can explore, and the common mix-up to check your understanding. End each unit with its worked example and revision questions.')
-add(f'Independent teaching notes, not official college notes. The separate laboratory syllabus is excluded. Course mapping: <link href="{meta["source"]}" color="#4889bc"><u>official theory syllabus, printed pages 8-9</u></link>.','small')
+add('A learning guide for everyone curious about networks. Each topic explains what the teaching model covers and what remains a theory concept.','small')
 story.append(PageBreak())
 add('CONTENTS / CLICK A UNIT TO JUMP','tag');add('Your five-unit study path.','h1')
 toc=TableOfContents();toc.levelStyles=[ParagraphStyle('toc',fontName='Body',fontSize=12,leading=19,spaceBefore=16,textColor=INK,leftIndent=0,firstLineIndent=0)];story.append(toc)
@@ -105,9 +105,9 @@ add('Use these primary references when you want to move beyond the short teachin
 for label,url in [('TCP: RFC 9293','https://www.rfc-editor.org/rfc/rfc9293.html'),('UDP: RFC 768','https://www.rfc-editor.org/rfc/rfc768.html'),('ARP: RFC 826','https://www.rfc-editor.org/rfc/rfc826.html'),('DNS concepts: RFC 1034','https://www.rfc-editor.org/rfc/rfc1034.html')]:add(f'<link href="{url}" color="#4889bc"><u>{label}</u></link>')
 add('What this document contains','h2');add('The complete five-unit notes currently authored in PacketVerse: all 47 topics, their coverage labels and four explanations, all worked examples, revision prompts, self-check questions and answers, and links between theory and the app.')
 add('The classroom uses concept pictures and the lab uses a deterministic teaching simulation. These notes make the boundaries explicit. A topic marked Theory only is not presented as an implemented simulator protocol.','small')
-add('Source course','h2');add(f'{esc(meta["institution"])} / {esc(meta["regulation"])} / {esc(meta["branch"])} / {esc(meta["semester"])} / {esc(meta["code"])}. Theory course only.');add(f'<link href="{meta["source"]}" color="#4889bc"><u>Official syllabus used for course mapping</u></link>')
-output=ROOT/'output/pdf/PacketVerse-CN-R25-Units-1-to-5.pdf';output.parent.mkdir(parents=True,exist_ok=True)
-doc=NotesDoc(str(output),pagesize=A4,leftMargin=46,rightMargin=46,topMargin=64,bottomMargin=55,title='PacketVerse - Complete CN Notes - R25 CYS Units 1-5',author='PacketVerse',pageCompression=1)
+
+output=ROOT/'output/pdf/PacketVerse-CN-Units-1-to-5.pdf';output.parent.mkdir(parents=True,exist_ok=True)
+doc=NotesDoc(str(output),pagesize=A4,leftMargin=46,rightMargin=46,topMargin=64,bottomMargin=55,title='PacketVerse - Complete CN Notes - Units 1-5',author='PacketVerse',pageCompression=1)
 doc.multiBuild(story,onFirstPage=decorate,onLaterPages=decorate)
 served=ROOT/'public/downloads'/output.name;served.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(output,served)
 manifest={'units':len(units),'topics':sum(len(u['topics']) for u in units),'sha256':hashlib.sha256(output.read_bytes()).hexdigest(),'filename':output.name}
