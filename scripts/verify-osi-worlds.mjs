@@ -1,0 +1,88 @@
+import {createRequire} from 'node:module';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const {chromium}=createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE||'playwright');
+const browser=await chromium.launch({headless:true});
+const errors=[],checks=[];
+try{
+ const page=await browser.newPage({viewport:{width:1440,height:1120},deviceScaleFactor:1});
+ page.on('pageerror',e=>errors.push(e.message));
+ const base=process.env.APP_URL||'http://127.0.0.1:5173';
+ await page.goto(base+'/#osi-layer-1');
+ await page.waitForSelector('#osi-canvas');
+ assert.match(page.url(),/#osi-layer-1$/);
+ assert.equal(await page.locator('#lab').isVisible(),false);
+ assert.equal(await page.locator('[data-osi-layer]').count(),7);
+ const names=['Physical','Data Link','Network','Transport','Session','Presentation','Application'];
+ await page.locator('#osi-message').fill('Hi 🌍');
+ assert.equal(await page.locator('#osi-bytes').innerText(),'7 bytes');
+ for(let id=1;id<=7;id++){
+  if(id>1) await page.locator('#osi-next').click();
+  await page.waitForURL('**/#osi-layer-'+id);
+  await page.waitForSelector(`[data-osi-layer="${id}"][aria-current]`);
+  assert.equal(await page.locator('[data-osi-layer][aria-current]').getAttribute('data-osi-layer'),String(id));
+  assert.equal(await page.locator('#osi-message').inputValue(),'Hi 🌍');
+  assert.equal(await page.locator('[data-osi-station]').count(),5);
+  assert.equal(await page.locator('#osi-step-count').innerText(),'1 / 5');
+  for(let station=0;station<5;station++){
+   await page.locator(`[data-osi-station="${station}"]`).click();
+   assert.equal(await page.locator('#osi-step-count').innerText(),`${station+1} / 5`);
+   assert((await page.locator('#osi-action').innerText()).length>10);
+   assert.equal(await page.locator('[data-osi-station][aria-pressed=true]').getAttribute('data-osi-station'),String(station));
+  }
+  assert(await page.locator('#osi-step').isDisabled());
+  await page.locator('#osi-reset').click();
+  await page.locator('#osi-step').click();
+  assert.equal(await page.locator('#osi-step-count').innerText(),'2 / 5');
+  await page.locator('#osi-detail summary').click();
+  assert((await page.locator('#osi-node-detail').innerText()).length>20);
+  if(id===6) assert.match(await page.locator('#osi-data-main').innerText(),/48 69 20 F0 9F 8C 8D/);
+  if(id===4) assert.match(await page.locator('#osi-data-sub').innerText(),/ACK 1007/);
+  if(id===1){await page.locator('#osi-reset').click();await page.screenshot({path:'docs/screenshots/osi-world-desktop.png',fullPage:true});}
+  checks.push(`${names[id-1]}: map, all 5 nodes, stepping, reset, inspection and shared message`);
+ }
+ assert(await page.locator('#osi-next').isDisabled());
+ await page.locator('[data-osi-layer="1"]').click();
+ await page.waitForSelector('[data-osi-layer="1"][aria-current]');
+ const rect=await page.locator('#osi-canvas').boundingBox();
+ const scale=Math.min(rect.width/1100,rect.height/540);
+ await page.locator('#osi-canvas').click({position:{x:(rect.width-1100*scale)/2+340*scale,y:(rect.height-540*scale)/2+190*scale}});
+ assert.equal(await page.locator('#osi-step-count').innerText(),'2 / 5');
+ await page.locator('#osi-reset').click();
+ await page.locator('#osi-play').click();
+ await page.waitForFunction(()=>document.querySelector('#osi-step-count').textContent==='5 / 5',null,{timeout:11000});
+ assert.match(await page.locator('#osi-play').innerText(),/Replay/);
+ await page.locator('#osi-play').click();
+ await page.locator('#osi-play').click();
+ assert.match(await page.locator('#osi-play').innerText(),/Play/);
+ checks.push('Canvas node hit-testing works; playback reaches the receiver, finishes, replays and pauses');
+ await page.locator('[data-osi-stack="7"]').click();
+ await page.goBack();await page.waitForURL('**/#osi-layer-1');await page.waitForSelector('[data-osi-layer="1"][aria-current]');
+ await page.reload();assert.equal(await page.locator('#osi-message').inputValue(),'Hi 🌍');
+ checks.push('Layer URLs, browser back and message persistence');
+ await page.locator('#osi-message').fill('');
+ assert.equal(await page.locator('#osi-data-main').innerText(),'No payload bits');
+ await page.locator('#osi-message').fill('Hi 🌍');
+ await page.locator('#osi-reference').click();assert(await page.locator('#modal').isVisible());
+ await page.locator('#close-modal').click();assert(await page.locator('#osi-canvas').isVisible());
+ await page.locator('#osi-exit').click();await page.locator('#lab').waitFor({state:'visible'});assert(await page.locator('#lab').isVisible());assert.equal(await page.locator('#osi-studio').isVisible(),false);
+ await page.locator('#osi-nav').click();await page.waitForSelector('#osi-canvas');
+ await page.locator('#lab-nav').click();await page.locator('#lab').waitFor({state:'visible'});
+ await page.locator('#trail').click();await page.locator('[data-chapter="0"]').click();
+ await page.locator('#lab').waitFor({state:'visible'});
+ await page.locator('#osi-nav').click();await page.waitForSelector('#osi-canvas');
+ checks.push('Syllabus reference, empty message, return to lab, lesson navigation and reopen work');
+ await page.setViewportSize({width:390,height:844});
+ await page.emulateMedia({reducedMotion:'reduce'});
+ await page.locator('[data-osi-layer="6"]').click();
+ await page.waitForSelector('[data-osi-layer="6"][aria-current]');
+ await page.locator('[data-osi-station="2"]').click();
+ assert(await page.locator('#osi-action').isVisible());
+ assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+ assert(await page.locator('.osi-canvas-scroll').evaluate(e=>e.scrollWidth>e.clientWidth));
+ await page.screenshot({path:'docs/screenshots/osi-world-mobile.png',fullPage:true});
+ checks.push('Mobile: scrollable map, layer navigation, working station alternatives, no page overflow, reduced motion');
+ assert.deepEqual(errors,[]);
+ fs.writeFileSync('docs/osi-world-verification.json',JSON.stringify({checks,errors,layers:7,stations:35},null,2));
+ console.log(JSON.stringify({checks,errors},null,2));
+}finally{await browser.close();}

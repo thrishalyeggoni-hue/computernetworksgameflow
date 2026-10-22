@@ -1,0 +1,1 @@
+This earlier Java companion was superseded when the user clarified that the intended subject was Computer Networks. It is retained only as historical source and is excluded from the running application. Its relative source imports and old verification script refer to the former layout.

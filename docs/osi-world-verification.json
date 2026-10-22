@@ -1,0 +1,18 @@
+{
+  "checks": [
+    "Physical: map, all 5 nodes, stepping, reset, inspection and shared message",
+    "Data Link: map, all 5 nodes, stepping, reset, inspection and shared message",
+    "Network: map, all 5 nodes, stepping, reset, inspection and shared message",
+    "Transport: map, all 5 nodes, stepping, reset, inspection and shared message",
+    "Session: map, all 5 nodes, stepping, reset, inspection and shared message",
+    "Presentation: map, all 5 nodes, stepping, reset, inspection and shared message",
+    "Application: map, all 5 nodes, stepping, reset, inspection and shared message",
+    "Canvas node hit-testing works; playback reaches the receiver, finishes, replays and pauses",
+    "Layer URLs, browser back and message persistence",
+    "Syllabus reference, empty message, return to lab, lesson navigation and reopen work",
+    "Mobile: scrollable map, layer navigation, working station alternatives, no page overflow, reduced motion"
+  ],
+  "errors": [],
+  "layers": 7,
+  "stations": 35
+}

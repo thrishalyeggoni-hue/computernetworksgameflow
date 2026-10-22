@@ -1,0 +1,11 @@
+{
+  "checks": [
+    "All seven data units, selected-layer highlight, live UTF-8 bytes, body bits and complete HTTP format render correctly",
+    "TCP, UDP, IPv4 and Ethernet field layouts expand and remain open while editing the message",
+    "Session context is explicitly distinguished from a wire header; message text is safely escaped",
+    "Every world expands the same reference on demand; no table remains in the page when closed",
+    "The combined journey keeps the table, active layer and editable message synchronized, including empty input",
+    "Phone table supports horizontal scrolling and keyboard focus without causing page overflow"
+  ],
+  "errors": []
+}

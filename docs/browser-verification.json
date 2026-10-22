@@ -1,0 +1,24 @@
+{
+  "viewport": [
+    1440,
+    1100
+  ],
+  "mobile": [
+    390,
+    844
+  ],
+  "checks": [
+    "message submission",
+    "packet field inspection",
+    "timed one-shot loss recovery",
+    "replay",
+    "event-based lesson completion",
+    "UDP no automatic recovery",
+    "alternative routing",
+    "no document overflow at 390px",
+    "reduced motion setting",
+    "browser JSON export/import round trip",
+    "invalid JSON import explanation"
+  ],
+  "browserErrors": []
+}

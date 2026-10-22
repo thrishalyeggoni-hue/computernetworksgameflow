@@ -7,3 +7,9 @@ videos/
 tools/nb/out/
 tools/nb/*/out/
 tools/nb/designer/*.png
+
+tmp/
+.env
+.env.*
+!.env.example
+*.tsbuildinfo

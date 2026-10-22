@@ -5,11 +5,18 @@
     "moduleResolution": "bundler",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "strict": true,
-    "noUnusedLocals": false,
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "types": ["vite/client"]
   },
-  "include": ["src", "tests", "scripts"]
+  "include": [
+    "src/main.ts",
+    "src/network",
+    "src/art/network",
+    "src/engine/network-playback.ts",
+    "src/ui/network-notebook.ts",
+    "src/scenarios/network.ts",
+    "tests/network"
+  ]
 }

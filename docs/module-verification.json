@@ -1,0 +1,10 @@
+{
+  "checks": [
+    "Exactly three main sections, with original lab controls and optional plain-language help",
+    "All six lab missions retained inside the lab; all five course units keep correct URLs",
+    "OSI worlds and whole journey share one parent; data formats expand once and share the message",
+    "Previous lab experiment survives navigation; missions, notebook, faults and sound controls remain",
+    "All three sections remain accessible on phones with no horizontal page overflow"
+  ],
+  "errors": []
+}

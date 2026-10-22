@@ -1,0 +1,10 @@
+{
+  "checks": [
+    "15 steps follow sender 7→1, link, receiver 1→7; headers nest and unwrap at the correct layers; original Unicode message arrives",
+    "Both stacks, the physical link, progress markers and previous/next are selectable",
+    "Play, pause, speed, replay and automatic completion work",
+    "Layer-world links, shared message, empty input, reload and browser back work",
+    "390px layout has no horizontal overflow; keyboard and reduced-motion controls work"
+  ],
+  "errors": []
+}

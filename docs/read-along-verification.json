@@ -1,0 +1,9 @@
+{
+  "checks": [
+    "Default read-along keeps an in-flight hop visible long enough to read, with map and explanation together at 760px",
+    "Pause/resume and the slower numeric speeds work; pace preference survives reload",
+    "At 390px the moving map and live story fit in one viewport without horizontal page overflow",
+    "Full notes downloads the real, complete five-unit PDF served by the website"
+  ],
+  "errors": []
+}

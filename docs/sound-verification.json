@@ -1,0 +1,15 @@
+{
+  "checks": [
+    "Enabled by default, with no audio context or autoplay before interaction",
+    "Real Web Audio starts on a user gesture; inspecting a station schedules musical notes",
+    "Typing and ordinary interface clicks stay quiet",
+    "Layer navigation produces its three-note transition",
+    "Animated station arrivals produce packet-hop sounds",
+    "Mute immediately suppresses interface and animation sounds",
+    "Volume updates the actual master gain; zero volume is silent",
+    "Mute and volume survive reload; enabling sound unlocks a fresh audio context",
+    "Network lab sends, packet transit and successful completion trigger sound",
+    "Browsers without audio support retain all learning controls without errors"
+  ],
+  "errors": []
+}

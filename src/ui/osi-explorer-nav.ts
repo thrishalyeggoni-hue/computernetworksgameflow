@@ -1,0 +1,3 @@
+export function osiExplorerNav(view:'worlds'|'connected') {
+ return `<nav class="osi-explorer-views" aria-label="OSI Explorer views"><button id="osi-worlds-open" ${view==='worlds'?'aria-current="page"':''}><b>7</b><span>Layer worlds<small>Explore one role at a time</small></span></button><button id="osi-connected-open" ${view==='connected'?'aria-current="page"':''}><b>↔</b><span>All 7 together<small>Follow one complete journey</small></span></button><button id="${view==='worlds'?'osi':'connected'}-formats-open" aria-haspopup="dialog"><b>▤</b><span>Data formats<small>Expand the shared colour guide</small></span></button></nav>`;
+}

@@ -1,0 +1,16 @@
+{
+  "checks": [
+    "Diagrams are primary; detailed theory starts collapsed",
+    "47 topic-specific visual stories and 109 steps render across all five units",
+    "Play advances and Pause freezes the shared-loop visual story",
+    "Concept selection is keyboard accessible",
+    "Responsive diagrams fit narrow screens without horizontal panning",
+    "Selected-topic classroom detail remains available on request",
+    "All five units download as the structured PDF",
+    "The live packet lab still works from the visual guide",
+    "Legacy classroom links still open the corrected course"
+  ],
+  "stories": 47,
+  "steps": 109,
+  "browserErrors": []
+}

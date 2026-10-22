@@ -1,0 +1,31 @@
+import {createRequire} from 'node:module';
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+const {chromium}=createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE||'playwright');
+const browser=await chromium.launch({headless:true});const errors=[],checks=[];
+try{
+ const page=await browser.newPage({viewport:{width:760,height:900}});page.on('pageerror',e=>errors.push(e.message));
+ const base=process.env.APP_URL||'http://127.0.0.1:4173';
+ await page.goto(base+'/#network-lab');assert.equal(await page.locator('#speed').inputValue(),'study');
+ await page.locator('#send').click();
+ await page.waitForFunction(()=>document.querySelector('#live-hop-label').textContent.includes('IN FLIGHT'));
+ const hop=await page.locator('#live-hop-title').innerText();await page.waitForTimeout(1100);
+ assert.equal(await page.locator('#live-hop-title').innerText(),hop);
+ const percent=await page.locator('#live-hop-progress').evaluate(e=>parseFloat(e.style.width));assert(percent>0&&percent<90);
+ const visibleTogether=await page.evaluate(()=>{const map=document.querySelector('#world').getBoundingClientRect(),reader=document.querySelector('.live-play-by-play').getBoundingClientRect();return map.top>=0&&map.bottom<=innerHeight&&reader.top>=0&&reader.bottom<=innerHeight;});assert(visibleTogether);
+ await page.screenshot({path:'docs/screenshots/read-along-medium.png'});
+ checks.push('Default read-along keeps an in-flight hop visible long enough to read, with map and explanation together at 760px');
+ await page.locator('#live-hop-pause').click();const paused=await page.locator('#time-label').innerText();await page.waitForTimeout(400);assert.equal(await page.locator('#time-label').innerText(),paused);await page.locator('#live-hop-pause').click();
+ for(const speed of ['0.02','0.05','0.1','0.25','0.5','1'])await page.locator('#speed').selectOption(speed);
+ await page.locator('#speed').selectOption('0.02');await page.reload();assert.equal(await page.locator('#speed').inputValue(),'0.02');
+ checks.push('Pause/resume and the slower numeric speeds work; pace preference survives reload');
+ await page.setViewportSize({width:390,height:844});await page.locator('#speed').selectOption('study');await page.locator('#send').click();await page.waitForFunction(()=>document.querySelector('#live-hop-label').textContent.includes('IN FLIGHT'));
+ assert(await page.evaluate(()=>{const map=document.querySelector('#world').getBoundingClientRect(),reader=document.querySelector('.live-play-by-play').getBoundingClientRect();return map.top>=0&&map.bottom<=innerHeight&&reader.bottom<=innerHeight&&document.documentElement.scrollWidth<=innerWidth;}));
+ await page.screenshot({path:'docs/screenshots/read-along-mobile.png'});
+ checks.push('At 390px the moving map and live story fit in one viewport without horizontal page overflow');
+ await page.locator('#live-hop-pause').click();await page.locator('[data-module="classroom"]').click();await page.waitForSelector('#cn-download');
+ const pending=page.waitForEvent('download');await page.locator('#cn-download').click();const download=await pending;const bytes=fs.readFileSync(await download.path());assert(bytes.subarray(0,5).toString()==='%PDF-');assert(download.suggestedFilename().endsWith('.pdf'));
+ const manifest=JSON.parse(fs.readFileSync('docs/study-notes-pdf-manifest.json','utf8'));const {createHash}=await import('node:crypto');assert.equal(createHash('sha256').update(bytes).digest('hex'),manifest.sha256);assert.equal(manifest.topics,47);
+ checks.push('Full notes downloads the real, complete five-unit PDF served by the website');
+ assert.deepEqual(errors,[]);fs.writeFileSync('docs/read-along-verification.json',JSON.stringify({checks,errors},null,2));console.log(JSON.stringify({checks,errors},null,2));
+}finally{await browser.close();}

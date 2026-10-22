@@ -1,16 +1,14 @@
 {
-  "name": "no-peeking",
+  "name": "packetverse",
   "private": true,
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc --noEmit && vite build",
-    "preview": "vite preview",
-    "test": "vitest run",
-    "verify-levels": "vitest run tests/quantum/levels.test.ts",
+    "dev": "vite --host 127.0.0.1",
     "typecheck": "tsc --noEmit",
-    "deploy": "bash scripts/deploy.sh"
+    "test": "vitest run tests/network",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host 127.0.0.1"
   },
   "devDependencies": {
     "typescript": "^5.9.3",
@@ -18,5 +16,6 @@
     "vitest": "^5.0.3"
   },
   "license": "CC-BY-NC-SA-4.0",
-  "author": "Nitheesh Chandra"
+  "author": "Nitheesh Chandra",
+  "description": "An illustrated, deterministic network packet journey simulator"
 }

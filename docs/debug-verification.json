@@ -1,0 +1,17 @@
+{
+  "checks": [
+    "Replay is disabled before a run",
+    "Rejected input preserves the last valid notebook configuration",
+    "Invalid endpoint selection produces an explanation",
+    "Live timeline updates preserve keyboard focus",
+    "Device inspection reopens a hidden notebook",
+    "Escape collapses expanded inspection",
+    "Settings persist after reload",
+    "Dialogs pause the simulation playback",
+    "Cleared lesson progress is not immediately reawarded from an old run",
+    "Fault editor shows the currently applied delay",
+    "No document overflow at 320, 390, 768, 1024, or 1440 pixels",
+    "All six guided lessons satisfy their actual objectives"
+  ],
+  "browserErrors": []
+}

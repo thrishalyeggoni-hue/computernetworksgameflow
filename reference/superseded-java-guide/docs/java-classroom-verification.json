@@ -1,0 +1,12 @@
+{
+  "checks": [
+    "Exact theory course metadata and all five units are visible",
+    "All units expose explanations, Java examples, pitfalls, revision prompts, and self-check answers",
+    "All-unit study notes download contains the five theory units",
+    "Unit selection is remembered on reopening",
+    "Classroom dialog fits 320/390/768/1440px widths; code and unit navigation scroll internally",
+    "Analogy link opens a working suggested network experiment without claiming Java execution",
+    "Direct unit links open the requested classroom page"
+  ],
+  "browserErrors": []
+}

@@ -1,0 +1,40 @@
+{
+  "compiler": "OpenJDK 21, --release 17",
+  "examples": [
+    {
+      "unit": 1,
+      "compiled": true,
+      "run": true,
+      "output": "Hello\nWelcome"
+    },
+    {
+      "unit": 2,
+      "compiled": true,
+      "run": true,
+      "output": "Router R1\nChoose a next hop"
+    },
+    {
+      "unit": 3,
+      "compiled": true,
+      "run": true,
+      "output": "Negative delay\n6"
+    },
+    {
+      "unit": 4,
+      "compiled": true,
+      "run": true,
+      "output": "2\n1\n02:00:00:00:00:01"
+    },
+    {
+      "unit": 5,
+      "compiled": true,
+      "run": false,
+      "reason": "Swing example compiled; graphical window not launched during automated verification."
+    }
+  ],
+  "jdbcFragment": {
+    "compiled": true,
+    "executed": false,
+    "reason": "Requires a configured database and JDBC connection."
+  }
+}
